@@ -7,12 +7,21 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.zhushaolong.soztest.MainActivity">
+    tools:context=".LaunchActivity">
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:nextFocusRight="@+id/launchModeBtn"
         android:text="Run App"
         android:onClick="runApp"/>
+
+    <Button
+        android:id="@+id/launchModeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/button"
+        android:text="LaunchMode"
+        android:onClick="jumpToLaunchModeTest"/>
 </RelativeLayout>

@@ -32,4 +32,8 @@ public class AppManagerUtils {
             localNameNotFoundException.printStackTrace();
         }
     }
+
+    public static void startActivity(Context context, Intent intent) {
+        context.startActivity(intent);
+    }
 }

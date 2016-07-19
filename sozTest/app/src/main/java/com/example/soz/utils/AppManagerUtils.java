@@ -13,6 +13,9 @@ import android.content.pm.ResolveInfo;
  */
 public class AppManagerUtils {
 
+    private AppManagerUtils() {
+    }
+
     public static void runApp(Context context, String paramString) {
         PackageManager localPackageManager = context.getPackageManager();
         try {

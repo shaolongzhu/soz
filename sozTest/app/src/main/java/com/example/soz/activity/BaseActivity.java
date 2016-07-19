@@ -3,6 +3,8 @@ package com.example.soz.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.soz.log.Logger;
 
@@ -71,5 +73,17 @@ public class BaseActivity extends Activity {
     public void onDestroy() {
         mLogger.i("onDestroy");
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        mLogger.i("onCreateOptionsMenu");
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        mLogger.i("onOptionsItemSelected");
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -9,6 +9,8 @@ import com.example.soz.changeSkin.utils.ResourcesManager;
 public interface ISkinManager {
     // return resources manager
     ResourcesManager getResourcesManager();
+    // loading resource for changing skin
+    void changeSkin(String PluginPkgPath);
     // change skin
-    void changeSkin(String PluginPkgName);
+    void apply(ISkinChangeListener skinChangeListener);
 }

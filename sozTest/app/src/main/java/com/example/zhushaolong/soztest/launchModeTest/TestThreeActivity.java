@@ -10,19 +10,18 @@ import com.example.soz.log.Logger;
 import com.example.zhushaolong.soztest.R;
 
 /**
- * fist activity for test
- * Created by zhushaolong on 7/14/16.
+ * Created by zhushaolong on 8/2/16.
  */
-public class TestOneActivity extends BaseActivity implements View.OnClickListener{
-    Logger mLogger = new Logger("TestOnActivity");
-    Button testA;
-    Button testB;
-    Button testC;
+public class TestThreeActivity extends BaseActivity implements View.OnClickListener{
+    private Logger mLogger = new Logger("TestThreeActivity");
+    private Button testA;
+    private Button testB;
+    private Button testC;
 
     @Override
-    public void onCreate(Bundle onSaveInstanced) {
+    public void onCreate(Bundle onSavedInstanceState) {
         mLogger.i("onCreate");
-        super.onCreate(onSaveInstanced);
+        super.onCreate(onSavedInstanceState);
         this.setContentView(R.layout.act_launch_test);
         this.initView();
         this.initEvent();
@@ -65,12 +64,6 @@ public class TestOneActivity extends BaseActivity implements View.OnClickListene
     }
 
     @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        mLogger.i("RestoreInstanceState");
-        super.onRestoreInstanceState(savedInstanceState);
-    }
-
-    @Override
     public void onResume() {
         mLogger.i("onResume");
         super.onResume();
@@ -80,12 +73,6 @@ public class TestOneActivity extends BaseActivity implements View.OnClickListene
     public void onPause() {
         mLogger.i("onPause");
         super.onPause();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        mLogger.i("onSaveInstanceState");
-        super.onSaveInstanceState(outState);
     }
 
     @Override

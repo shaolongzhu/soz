@@ -44,7 +44,7 @@ public class SkinManager implements ISkinManager {
     }
 
     private static class SkinManagerHolder {
-        public final static SkinManager INSTANCE = new SkinManager();
+        private final static SkinManager INSTANCE = new SkinManager();
     }
 
     /**

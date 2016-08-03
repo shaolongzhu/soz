@@ -17,6 +17,7 @@ public class TestTwoActivity extends BaseActivity implements View.OnClickListene
     private Logger mLogger = new Logger("TestTwoActivity");
     private Button testA;
     private Button testB;
+    private Button testC;
 
     @Override
     public void onCreate(Bundle onSavedInstanceState) {
@@ -33,6 +34,7 @@ public class TestTwoActivity extends BaseActivity implements View.OnClickListene
     private void initView() {
         testA = (Button) findViewById(R.id.testA);
         testB = (Button) findViewById(R.id.testB);
+        testC = (Button) findViewById(R.id.testC);
     }
 
     /**
@@ -41,6 +43,7 @@ public class TestTwoActivity extends BaseActivity implements View.OnClickListene
     private void initEvent() {
         this.testA.setOnClickListener(this);
         this.testB.setOnClickListener(this);
+        this.testC.setOnClickListener(this);
     }
 
     @Override
@@ -95,6 +98,11 @@ public class TestTwoActivity extends BaseActivity implements View.OnClickListene
         this.startActivity(intent);
     }
 
+    private void gotoTestC() {
+        Intent intent = new Intent(this, TestThreeActivity.class);
+        this.startActivity(intent);
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -103,6 +111,10 @@ public class TestTwoActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.testB:
                 gotoTestB();
+                break;
+            case R.id.testC:
+                gotoTestC();
+                this.finish();
                 break;
         }
     }

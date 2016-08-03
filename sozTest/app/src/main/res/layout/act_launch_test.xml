@@ -10,8 +10,14 @@
         android:text="Test A"/>
 
     <Button
-        android:id="@+id/testB"
+    android:id="@+id/testB"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Test B"/>
+
+    <Button
+        android:id="@+id/testC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test B"/>
+        android:text="Test C"/>
 </LinearLayout>

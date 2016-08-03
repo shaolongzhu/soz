@@ -28,6 +28,9 @@
             android:label="Test B"
             android:theme="@android:style/Theme"
             android:launchMode="singleTask"></activity>
+        <activity android:name=".launchModeTest.TestThreeActivity"
+            android:theme="@android:style/Theme"
+            android:launchMode="singleTask"></activity>
         <activity android:name=".pluginTest.ChangeSkinActivity"
             android:label="change Skin"
             android:theme="@android:style/Theme.Holo"></activity>

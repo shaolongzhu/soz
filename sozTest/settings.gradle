@@ -1,1 +1,3 @@
-include ':app', ':sozplugin'
+include ':Test', ':sozplugin', ':lib'
+project(':sozplugin').projectDir = new File('sample/sozplugin')
+project(':Test').projectDir = new File('sample/Test')

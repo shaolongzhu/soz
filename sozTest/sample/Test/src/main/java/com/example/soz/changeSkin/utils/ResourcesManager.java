@@ -11,7 +11,7 @@ import com.example.soz.log.Logger;
  */
 public class ResourcesManager implements IResourcesManager {
     Logger mLogger = new Logger("ResourcesManager");
-    private static final String DRAWABLE = "drawable";
+    private static final String DRAWABLE = "build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable";
     private Resources mResources;
     private String mPkgName = SkinConfig.SKIN_PKG_NAME;
 

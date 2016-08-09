@@ -181,7 +181,7 @@ public class ChangeSkinActivity extends BaseSkinActivity {
             Resources superRes = getResources();
             Resources mResources = new Resources(assetManager, superRes.getDisplayMetrics(), superRes.getConfiguration());
 
-            int mainBgId = mResources.getIdentifier("skin_main_bg", "drawable", SkinConfig.SKIN_PKG_NAME);
+            int mainBgId = mResources.getIdentifier("skin_main_bg", "build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable", SkinConfig.SKIN_PKG_NAME);
             findViewById(R.id.drawer_menu).setBackgroundDrawable(mResources.getDrawable(mainBgId));
 
         } catch (Exception e)

@@ -8,6 +8,7 @@ import com.example.soz.activity.BaseActivity;
 import com.example.soz.utils.AppManagerUtils;
 import com.example.zhushaolong.soztest.launchModeTest.TestOneActivity;
 import com.example.zhushaolong.soztest.pluginTest.ChangeSkinActivity;
+import com.example.zhushaolong.soztest.pluginTest.DynamicLoadActivity;
 
 public class LaunchActivity extends BaseActivity {
 
@@ -28,6 +29,11 @@ public class LaunchActivity extends BaseActivity {
 
     public void jumpToChangeSkin(View view) {
         Intent intent = new Intent(LaunchActivity.this, ChangeSkinActivity.class);
+        AppManagerUtils.startActivity(this, intent);
+    }
+
+    public void jumpToDLPlugin(View view) {
+        Intent intent = new Intent(LaunchActivity.this, DynamicLoadActivity.class);
         AppManagerUtils.startActivity(this, intent);
     }
 }

@@ -34,6 +34,10 @@
         <activity android:name=".pluginTest.ChangeSkinActivity"
             android:label="change Skin"
             android:theme="@android:style/Theme.Holo"></activity>
+        <activity android:name="com.example.soz.dynamicLoad.DLProxyActivity"
+            android:label="DL proxy"></activity>
+        <activity android:name=".pluginTest.DynamicLoadActivity"
+            android:label="DL test"></activity>
     </application>
 
 </manifest>

@@ -3,9 +3,11 @@ package com.example.soz.utils;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
 
 /**
  * app manager tools
@@ -38,5 +40,36 @@ public class AppManagerUtils {
 
     public static void startActivity(Context context, Intent intent) {
         context.startActivity(intent);
+    }
+
+    public static PackageInfo getPackageInfo(Context context, String apkFilePath) {
+        PackageManager pm = context.getPackageManager();
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = pm.getPackageInfo(apkFilePath, PackageManager.GET_ACTIVITIES | PackageManager.GET_SERVICES);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return packageInfo;
+    }
+
+    public static Drawable getAppIcon(Context context, String apkFilePath) {
+        PackageManager pm = context.getPackageManager();
+        PackageInfo packageInfo = getPackageInfo(context, apkFilePath);
+        if (packageInfo == null) return null;
+        ApplicationInfo applicationInfo = packageInfo.applicationInfo;
+        applicationInfo.sourceDir = apkFilePath;
+        applicationInfo.publicSourceDir = apkFilePath;
+        return pm.getApplicationIcon(applicationInfo);
+    }
+
+    public static CharSequence getAppLabel(Context context, String apkFilePath) {
+        PackageManager pm = context.getPackageManager();
+        PackageInfo packageInfo = getPackageInfo(context, apkFilePath);
+        if (packageInfo == null) return null;
+        ApplicationInfo applicationInfo = packageInfo.applicationInfo;
+        applicationInfo.sourceDir = apkFilePath;
+        applicationInfo.publicSourceDir = apkFilePath;
+        return pm.getApplicationLabel(applicationInfo);
     }
 }

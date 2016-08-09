@@ -17,13 +17,13 @@ import com.example.soz.log.Logger;
 import com.example.soz.recyclerView.adapter.BaseCustomAdapter;
 import com.example.soz.recyclerView.utils.LayoutManagerType;
 import com.example.soz.recyclerView.utils.RecyclerViewManager;
+import com.example.soz.recyclerView.viewHolder.BaseCustomItem;
 import com.example.soz.utils.FragmentUtils;
 import com.example.zhushaolong.soztest.R;
 import com.nineoldandroids.view.ViewHelper;
 
 import java.io.File;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -33,7 +33,8 @@ import java.util.List;
 public class ChangeSkinActivity extends BaseSkinActivity {
     private Logger mLogger = new Logger("ChangeSkinActivity");
     String[] data = new String[]{"item1", "item2", "item3"};
-    List<String> mData = Arrays.asList(data);
+//    List<String> mData = Arrays.asList(data);
+    List<BaseCustomItem> mData;
     DrawerLayout mDrawerLayout;
     FrameLayout mContent;
     RecyclerView mRecyclerView;
@@ -61,10 +62,23 @@ public class ChangeSkinActivity extends BaseSkinActivity {
      * init data
      */
     private void initData() {
+        this.fillData();
         BaseCustomAdapter adapter = new BaseCustomAdapter(mData);
         mRecyclerView.setAdapter(adapter);
         RecyclerViewManager.setRecyclerViewLayoutManager(this, mRecyclerView, LayoutManagerType.LINEAR_LAYOUT_MANAGER);
         FragmentUtils.addFragment(this, R.id.drawer_content, new ChangeSkinFragment());
+    }
+
+    /**
+     * fill data for show
+     */
+    private void fillData() {
+        for (String s:data) {
+            BaseCustomItem item = new BaseCustomItem();
+            item.setTitle(s);
+            item.setIconId(R.drawable.skin_left_menu_icon);
+            item.setDesc("soz");
+        }
     }
 
     /**

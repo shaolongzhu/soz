@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.zhushaolong.soztest">
+    package="com.soz.sozTest">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -20,23 +20,24 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".launchModeTest.TestOneActivity"
+        <activity android:name=".launchMode.TestOneActivity"
             android:label="Test A"
             android:theme="@android:style/Theme"
             android:launchMode="standard"></activity>
-        <activity android:name=".launchModeTest.TestTwoActivity"
+        <activity android:name=".launchMode.TestTwoActivity"
             android:label="Test B"
             android:theme="@android:style/Theme"
             android:launchMode="singleTask"></activity>
-        <activity android:name=".launchModeTest.TestThreeActivity"
+        <activity android:name=".launchMode.TestThreeActivity"
+            android:label="Test C"
             android:theme="@android:style/Theme"
             android:launchMode="singleTask"></activity>
-        <activity android:name=".pluginTest.ChangeSkinActivity"
+        <activity android:name=".plugin.ChangeSkinActivity"
             android:label="change Skin"
             android:theme="@android:style/Theme.Holo"></activity>
-        <activity android:name="com.example.soz.dynamicLoad.DLProxyActivity"
+        <activity android:name="com.soz.dynamicLoad.DLProxyActivity"
             android:label="DL proxy"></activity>
-        <activity android:name=".pluginTest.DynamicLoadActivity"
+        <activity android:name=".plugin.DynamicLoadActivity"
             android:label="DL test"></activity>
     </application>
 

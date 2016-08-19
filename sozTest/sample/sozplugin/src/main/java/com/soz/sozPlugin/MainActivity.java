@@ -9,7 +9,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.act_main);
         ((ImageView) findViewById(R.id.img_test))
                 .setImageResource(R.drawable.skin_left_menu_icon);
     }

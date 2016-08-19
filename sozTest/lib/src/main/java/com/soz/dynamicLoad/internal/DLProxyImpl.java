@@ -45,9 +45,19 @@ public class DLProxyImpl {
 
         this.mPluginManager = DLPluginManager.getInstance(this.mProxyActivity);
         this.mPluginPackage = this.mPluginManager.getPackage(this.mPackageName);
+        this.mResources = this.mPluginPackage.resources;
+        this.mAssertManager = this.mPluginPackage.assetManager;
 
         initializeActivityInfo();
         launchTargetActivity();
+    }
+
+    public Resources getResources() {
+        return this.mResources;
+    }
+
+    public AssetManager getAsserts() {
+        return this.mAssertManager;
     }
 
     private void initializeActivityInfo() {

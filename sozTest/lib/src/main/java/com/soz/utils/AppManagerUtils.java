@@ -46,7 +46,7 @@ public class AppManagerUtils {
         PackageManager pm = context.getPackageManager();
         PackageInfo packageInfo = null;
         try {
-            packageInfo = pm.getPackageInfo(apkFilePath, PackageManager.GET_ACTIVITIES | PackageManager.GET_SERVICES);
+            packageInfo = pm.getPackageArchiveInfo(apkFilePath, PackageManager.GET_ACTIVITIES | PackageManager.GET_SERVICES);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -71,5 +71,11 @@ public class AppManagerUtils {
         applicationInfo.sourceDir = apkFilePath;
         applicationInfo.publicSourceDir = apkFilePath;
         return pm.getApplicationLabel(applicationInfo);
+    }
+
+    public static String getPackageName(Context context, String apkFilePath) {
+        PackageInfo packageInfo = getPackageInfo(context, apkFilePath);
+        if (packageInfo == null) return null;
+        return packageInfo.packageName;
     }
 }

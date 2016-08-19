@@ -8,6 +8,7 @@ import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.text.TextUtils;
 
+import com.soz.dynamicLoad.DLBasePluginActivity;
 import com.soz.dynamicLoad.DLProxyActivity;
 import com.soz.dynamicLoad.utils.DLConstants;
 import com.soz.log.Logger;
@@ -88,12 +89,8 @@ public class DLPluginManager {
         DexClassLoader classLoader = createClassLoader(dexPath);
         AssetManager assetManager = createAssetManager(dexPath);
         Resources resources = createResources(assetManager);
-        pluginPackage = new DLPluginPackage();
-        pluginPackage.assetManager = assetManager;
-        pluginPackage.classLoader = classLoader;
-        pluginPackage.packageInfo = packageInfo;
-        pluginPackage.resources = resources;
-        pluginPackage.packageName = packageInfo.packageName;
+        pluginPackage = new DLPluginPackage(classLoader, resources, packageInfo);
+        this.mPluginHolder.put(packageInfo.packageName, pluginPackage);
         return pluginPackage;
     }
 
@@ -188,7 +185,7 @@ public class DLPluginManager {
 
     private Class<? extends Activity> getProxyActivityClass(Class<?> clazz) {
         Class<? extends Activity> activity = null;
-        if (DLProxyActivity.class.isAssignableFrom(clazz)) {
+        if (DLBasePluginActivity.class.isAssignableFrom(clazz)) {
             activity = DLProxyActivity.class;
         }
         return activity;

@@ -1,11 +1,14 @@
 package com.soz.sozTest.plugin;
 
+import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.soz.dynamicLoad.DLBasePluginActivity;
+import com.soz.dynamicLoad.internal.DLIntent;
 import com.soz.dynamicLoad.internal.DLPluginManager;
 import com.soz.log.Logger;
 import com.soz.recyclerView.adapter.BaseCustomAdapter;
@@ -13,6 +16,7 @@ import com.soz.recyclerView.utils.LayoutManagerType;
 import com.soz.recyclerView.utils.RecyclerViewManager;
 import com.soz.recyclerView.viewHolder.BaseCustomItem;
 import com.soz.sozTest.R;
+import com.soz.sozTest.plugin.bean.PluginItem;
 import com.soz.utils.AppManagerUtils;
 
 import java.io.File;
@@ -28,6 +32,7 @@ public class DynamicLoadActivity extends DLBasePluginActivity implements BaseCus
     private final String pluginPath = Environment.getExternalStorageDirectory()
             + File.separator + "dl";
     RecyclerView mListContainer;
+    TextView mText;
     List<BaseCustomItem> mData = new ArrayList<BaseCustomItem>();
 
     @Override
@@ -41,17 +46,29 @@ public class DynamicLoadActivity extends DLBasePluginActivity implements BaseCus
 
     private void initView() {
         this.mListContainer = (RecyclerView) this.findViewById(R.id.dl_plugin_list);
+        this.mText = (TextView) this.findViewById(R.id.dl_no_data);
     }
 
     private void initData() {
         File file = new File(pluginPath);
         File[] plugins = file.listFiles();
-        if (plugins == null || plugins.length == 0) return;
+        if (plugins == null || plugins.length == 0) {
+            mLogger.i("no plugin data");
+            this.mText.setVisibility(View.VISIBLE);
+            return;
+        }
         for (File f: plugins) {
             DLPluginManager.getInstance(this).loadAPK(f.getAbsolutePath());
-            BaseCustomItem item = new BaseCustomItem();
+            PluginItem item = new PluginItem();
             item.setTitle(AppManagerUtils.getAppLabel(this, f.getAbsolutePath()).toString());
             item.setIcon(AppManagerUtils.getAppIcon(this, f.getAbsolutePath().toString()));
+            item.setPackageName(AppManagerUtils.getPackageName(this, f.getAbsolutePath().toString()));
+            PackageInfo packageInfo = AppManagerUtils.getPackageInfo(this, f.getAbsolutePath());
+            if (packageInfo != null && packageInfo.activities != null &&
+                    packageInfo.activities.length >= 2) {
+                String launcherActivity = packageInfo.activities[1].name;
+                item.setLauncherActivity(launcherActivity);
+            }
             mData.add(item);
         }
         RecyclerViewManager.setRecyclerViewLayoutManager(this, this.mListContainer, LayoutManagerType.LINEAR_LAYOUT_MANAGER);
@@ -61,5 +78,11 @@ public class DynamicLoadActivity extends DLBasePluginActivity implements BaseCus
 
     @Override
     public void onItemClick(View view, int position) {
+        if (mData == null || mData.size() <= position) return;
+        mLogger.i("[onItemClick] position = " + position);
+        String packageName = ((PluginItem) this.mData.get(position)).getPackageName();
+        String launcherActivity = ((PluginItem) this.mData.get(position)).getLauncherActivity();
+        DLPluginManager.getInstance(this)
+                .startPluginActivity(this, new DLIntent(packageName, launcherActivity));
     }
 }

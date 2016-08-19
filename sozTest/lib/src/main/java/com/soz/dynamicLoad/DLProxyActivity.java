@@ -1,5 +1,7 @@
 package com.soz.dynamicLoad;
 
+import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import com.soz.activity.BaseActivity;
@@ -26,6 +28,16 @@ public class DLProxyActivity extends BaseActivity implements DLAttachable {
     @Override
     public void onAttach(DLPlugin dlPlugin) {
         this.mRemoteActivity = dlPlugin;
+    }
+
+    @Override
+    public Resources getResources() {
+        return impl.getResources() == null ? super.getResources() : impl.getResources();
+    }
+
+    @Override
+    public AssetManager getAssets() {
+        return impl.getAsserts() == null ? super.getAssets() : impl.getAsserts();
     }
 
     @Override

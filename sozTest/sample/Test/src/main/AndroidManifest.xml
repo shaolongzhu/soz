@@ -39,6 +39,10 @@
             android:label="DL proxy"></activity>
         <activity android:name=".plugin.DynamicLoadActivity"
             android:label="DL test"></activity>
+        <activity android:name=".plugin.MainHookActivity"
+            android:label="Hook"></activity>
+        <activity android:name=".plugin.proxyHook.ProxyHookActivity"
+            android:label="Hook proxy"></activity>
     </application>
 
 </manifest>

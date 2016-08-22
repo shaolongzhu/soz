@@ -1,4 +1,4 @@
-package com.soz.dynamicLoad;
+package com.soz.hook;
 
 import android.os.Bundle;
 
@@ -6,16 +6,16 @@ import com.soz.activity.BaseActivity;
 import com.soz.log.Logger;
 
 /**
- * daynamic load plugin base activity, all plugin activity should extend it.
- * Created by zhushaolong on 8/8/16.
+ * hook plugin base activity, all plugin should extend it
+ * Created by zhushaolong on 8/19/16.
  */
-public abstract class DLBasePluginActivity extends BaseActivity implements DLPlugin{
-    Logger mLogger = new Logger("DLBasePluginActivity");
+public abstract class BaseHookPluginActivity extends BaseActivity {
+    Logger mLogger = new Logger("BaseHookPluginActivity");
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle onSavedInstanced) {
         mLogger.i("onCreate");
-        super.onCreate(savedInstanceState);
+        super.onCreate(onSavedInstanced);
     }
 
     @Override

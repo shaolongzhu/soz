@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.soz.activity.BaseActivity;
+import com.soz.sozTest.plugin.MainHookActivity;
 import com.soz.utils.AppManagerUtils;
 import com.soz.sozTest.launchMode.TestOneActivity;
 import com.soz.sozTest.plugin.ChangeSkinActivity;
@@ -34,6 +35,11 @@ public class LaunchActivity extends BaseActivity {
 
     public void jumpToDLPlugin(View view) {
         Intent intent = new Intent(LaunchActivity.this, DynamicLoadActivity.class);
+        AppManagerUtils.startActivity(this, intent);
+    }
+
+    public void jumpToHookMain(View view) {
+        Intent intent = new Intent(LaunchActivity.this, MainHookActivity.class);
         AppManagerUtils.startActivity(this, intent);
     }
 }

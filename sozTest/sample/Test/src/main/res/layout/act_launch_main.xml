@@ -38,4 +38,10 @@
         android:layout_height="wrap_content"
         android:text="DL"
         android:onClick="jumpToDLPlugin"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="hook"
+        android:onClick="jumpToHookMain"/>
 </LinearLayout>

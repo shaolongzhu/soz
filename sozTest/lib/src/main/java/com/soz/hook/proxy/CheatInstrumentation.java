@@ -1,4 +1,4 @@
-package com.soz.hook;
+package com.soz.hook.proxy;
 
 import android.app.Activity;
 import android.app.Instrumentation;

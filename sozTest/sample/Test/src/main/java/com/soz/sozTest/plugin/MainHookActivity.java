@@ -7,6 +7,7 @@ import android.view.View;
 import com.soz.activity.BaseActivity;
 import com.soz.log.Logger;
 import com.soz.sozTest.R;
+import com.soz.sozTest.plugin.proxyHook.BinderHookActivity;
 import com.soz.sozTest.plugin.proxyHook.ProxyHookActivity;
 import com.soz.utils.AppManagerUtils;
 
@@ -25,6 +26,11 @@ public class MainHookActivity extends BaseActivity {
 
     public void jumpToProxyHook(View view) {
         Intent intent = new Intent(MainHookActivity.this, ProxyHookActivity.class);
+        AppManagerUtils.startActivity(this, intent);
+    }
+
+    public void jumpToBinderHook(View view) {
+        Intent intent = new Intent(MainHookActivity.this, BinderHookActivity.class);
         AppManagerUtils.startActivity(this, intent);
     }
 

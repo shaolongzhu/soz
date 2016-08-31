@@ -42,7 +42,9 @@
         <activity android:name=".plugin.MainHookActivity"
             android:label="Hook"></activity>
         <activity android:name=".plugin.proxyHook.ProxyHookActivity"
-            android:label="Hook proxy"></activity>
+            android:label="proxy hook"></activity>
+        <activity android:name=".plugin.proxyHook.BinderHookActivity"
+            android:label="binder hook"></activity>
     </application>
 
 </manifest>

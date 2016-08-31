@@ -22,7 +22,7 @@ public class ProxyHookActivity extends BaseHookPluginActivity {
     public void onCreate(Bundle onSavedInstanced) {
         mLogger.i("onCreate");
         super.onCreate(onSavedInstanced);
-        this.setContentView(R.layout.act_hook_proxy);
+        this.setContentView(R.layout.act_proxy_hook);
     }
 
     public void jumpToOther(View view) {

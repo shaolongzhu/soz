@@ -13,9 +13,9 @@ public abstract class BaseHookPluginActivity extends BaseActivity {
     Logger mLogger = new Logger("BaseHookPluginActivity");
 
     @Override
-    public void onCreate(Bundle onSavedInstanced) {
+    public void onCreate(Bundle onSavedInstanceState) {
         mLogger.i("onCreate");
-        super.onCreate(onSavedInstanced);
+        super.onCreate(onSavedInstanceState);
     }
 
     @Override

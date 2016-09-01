@@ -45,6 +45,8 @@
             android:label="proxy hook"></activity>
         <activity android:name=".plugin.proxyHook.BinderHookActivity"
             android:label="binder hook"></activity>
+        <activity android:name=".plugin.proxyHook.AMSHookActivity"
+            android:label="AMS hook"></activity>
     </application>
 
 </manifest>

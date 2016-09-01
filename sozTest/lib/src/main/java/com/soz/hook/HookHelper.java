@@ -2,11 +2,14 @@ package com.soz.hook;
 
 import android.app.ActivityManager;
 import android.app.Instrumentation;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.IBinder;
 
 import com.soz.hook.proxy.AMSHookHandler;
 import com.soz.hook.proxy.BinderHookProxyHandler;
 import com.soz.hook.proxy.CheatInstrumentation;
+import com.soz.hook.proxy.PMSHookHandler;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -63,5 +66,27 @@ public final class HookHelper {
         Object proxyActivityManager = Proxy.newProxyInstance(ActivityManager.class.getClassLoader(),
                 new Class<?>[]{iActivityManagerInterface}, new AMSHookHandler(rawActivityManager));
         mInstanceField.set(gDefault, proxyActivityManager);
+    }
+
+    public static void HookPackageManager(Context context) throws Exception {
+        // 获取 activityThread 对象
+        Class<?> activityThreadClass = Class.forName("android.app.ActivityThread");
+        Method currentActivityThreadMethod = activityThreadClass.getDeclaredMethod("currentActivityThread");
+        Object currentActivityThread = currentActivityThreadMethod.invoke(null);
+
+        Field sPackageManagerField = activityThreadClass.getDeclaredField("sPackageManager");
+        sPackageManagerField.setAccessible(true);
+        Object sPackageManager = sPackageManagerField.get(currentActivityThread);
+
+        Class<?> iPackageManagerInterface = Class.forName("android.content.pm.IPackageManager");
+        Object proxy = Proxy.newProxyInstance(iPackageManagerInterface.getClassLoader(), new Class[] {iPackageManagerInterface},
+                new PMSHookHandler(sPackageManager));
+
+        sPackageManagerField.set(currentActivityThread, proxy);
+
+        PackageManager pm = context.getPackageManager();
+        Field mPmField = pm.getClass().getDeclaredField("mPM");
+        mPmField.setAccessible(true);
+        mPmField.set(pm, proxy);
     }
 }

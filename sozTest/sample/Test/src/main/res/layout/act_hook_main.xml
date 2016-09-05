@@ -27,4 +27,10 @@
         android:text="PMS hook"
         android:onClick="jumpToPMSHook"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Act hook"
+        android:onClick="jumpToActHook"/>
+
 </LinearLayout>

@@ -8,6 +8,7 @@ import com.soz.activity.BaseActivity;
 import com.soz.log.Logger;
 import com.soz.sozTest.R;
 import com.soz.sozTest.plugin.proxyHook.AMSHookActivity;
+import com.soz.sozTest.plugin.proxyHook.ActHookActivity;
 import com.soz.sozTest.plugin.proxyHook.BinderHookActivity;
 import com.soz.sozTest.plugin.proxyHook.PMSHookActivity;
 import com.soz.sozTest.plugin.proxyHook.ProxyHookActivity;
@@ -43,6 +44,11 @@ public class MainHookActivity extends BaseActivity {
 
     public void jumpToPMSHook(View view) {
         Intent intent = new Intent(MainHookActivity.this, PMSHookActivity.class);
+        AppManagerUtils.startActivity(this, intent);
+    }
+
+    public void jumpToActHook(View view) {
+        Intent intent = new Intent(MainHookActivity.this, ActHookActivity.class);
         AppManagerUtils.startActivity(this, intent);
     }
 

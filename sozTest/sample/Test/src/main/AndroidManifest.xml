@@ -49,6 +49,10 @@
             android:label="AMS hook"></activity>
         <activity android:name=".plugin.proxyHook.PMSHookActivity"
             android:label="PMS hook"></activity>
+        <activity android:name=".plugin.proxyHook.ActHookActivity"
+            android:label="ACT hook"></activity>
+        <activity android:name=".act.StubActivity"
+            android:label="Stub Activity"></activity>
     </application>
 
 </manifest>

@@ -4,9 +4,11 @@ import android.app.ActivityManager;
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.os.IBinder;
 
 import com.soz.hook.proxy.AMSHookHandler;
+import com.soz.hook.proxy.ActivityThreadHandlerCallback;
 import com.soz.hook.proxy.BinderHookProxyHandler;
 import com.soz.hook.proxy.CheatInstrumentation;
 import com.soz.hook.proxy.PMSHookHandler;
@@ -88,5 +90,20 @@ public final class HookHelper {
         Field mPmField = pm.getClass().getDeclaredField("mPM");
         mPmField.setAccessible(true);
         mPmField.set(pm, proxy);
+    }
+
+    public static void HookActivityThreadHandler() throws Exception {
+        // 获取 activityThread 对象
+        Class<?> activityThreadClass = Class.forName("android.app.ActivityThread");
+        Method currentActivityThreadMethod = activityThreadClass.getDeclaredMethod("currentActivityThread");
+        Object currentActivityThread = currentActivityThreadMethod.invoke(null);
+
+        Field mHField = activityThreadClass.getDeclaredField("mH");
+        mHField.setAccessible(true);
+        Handler mH = (Handler) mHField.get(currentActivityThread);
+
+        Field mCallbackField = Handler.class.getDeclaredField("mCallback");
+        mCallbackField.setAccessible(true);
+        mCallbackField.set(mH, new ActivityThreadHandlerCallback(mH));
     }
 }

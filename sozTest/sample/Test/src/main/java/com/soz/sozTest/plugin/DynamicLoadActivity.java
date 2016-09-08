@@ -18,6 +18,8 @@ import com.soz.recyclerView.viewHolder.BaseCustomItem;
 import com.soz.sozTest.R;
 import com.soz.sozTest.plugin.bean.PluginItem;
 import com.soz.utils.AppManagerUtils;
+import com.soz.utils.ConstantUtils;
+import com.soz.utils.FileUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -50,7 +52,9 @@ public class DynamicLoadActivity extends DLBasePluginActivity implements BaseCus
     }
 
     private void initData() {
-        File file = new File(pluginPath);
+        FileUtils.extractAssets(this, ConstantUtils.APK_FILE_2);
+//        File file = new File(pluginPath);
+        File file = this.getFilesDir();
         File[] plugins = file.listFiles();
         if (plugins == null || plugins.length == 0) {
             mLogger.i("no plugin data");
@@ -68,6 +72,7 @@ public class DynamicLoadActivity extends DLBasePluginActivity implements BaseCus
                     packageInfo.activities.length >= 2) {
                 String launcherActivity = packageInfo.activities[1].name;
                 item.setLauncherActivity(launcherActivity);
+                mLogger.i("launcherActivity name: " + launcherActivity);
             }
             mData.add(item);
         }
@@ -79,9 +84,9 @@ public class DynamicLoadActivity extends DLBasePluginActivity implements BaseCus
     @Override
     public void onItemClick(View view, int position) {
         if (mData == null || mData.size() <= position) return;
-        mLogger.i("[onItemClick] position = " + position);
         String packageName = ((PluginItem) this.mData.get(position)).getPackageName();
         String launcherActivity = ((PluginItem) this.mData.get(position)).getLauncherActivity();
+        mLogger.i("[onItemClick] position = " + position + " packageName = " + packageName + " launcherActivity = " + launcherActivity);
         DLPluginManager.getInstance(this)
                 .startPluginActivity(this, new DLIntent(packageName, launcherActivity));
     }

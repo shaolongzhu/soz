@@ -1,6 +1,7 @@
 package com.soz.sozPlugin;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.soz.dynamicLoad.DLBasePluginActivity;
 import com.soz.log.Logger;
@@ -17,5 +18,6 @@ public class DLPluginActivity extends DLBasePluginActivity{
         mLogger.i("onCreate");
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.act_dl);
+        Toast.makeText(this, "other", Toast.LENGTH_LONG).show();
     }
 }

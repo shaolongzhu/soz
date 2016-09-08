@@ -1,5 +1,7 @@
 package com.soz.hook.proxy;
 
+import android.content.pm.PackageInfo;
+
 import com.soz.log.Logger;
 
 import java.lang.reflect.InvocationHandler;
@@ -21,6 +23,9 @@ public class PMSHookHandler implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         mLogger.i("[PMS]you are hooked");
         mLogger.i("method: " + method.getName() + " called with args " + Arrays.toString(args));
+        if ("getPackageInfo".equals(method.getName())) {
+            return new PackageInfo();
+        }
         return method.invoke(this.mBase, args);
     }
 }

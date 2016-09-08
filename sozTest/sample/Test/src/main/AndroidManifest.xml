@@ -53,6 +53,8 @@
             android:label="ACT hook"></activity>
         <activity android:name=".act.StubActivity"
             android:label="Stub Activity"></activity>
+        <activity android:name=".plugin.proxyHook.ClassLoaderHookActivity"
+            android:label="Classloader Activity"></activity>
     </application>
 
 </manifest>

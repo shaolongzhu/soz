@@ -3,6 +3,7 @@ package com.soz.hook;
 import android.app.ActivityManager;
 import android.app.Instrumentation;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.IBinder;
@@ -12,8 +13,10 @@ import com.soz.hook.proxy.ActivityThreadHandlerCallback;
 import com.soz.hook.proxy.BinderHookProxyHandler;
 import com.soz.hook.proxy.CheatInstrumentation;
 import com.soz.hook.proxy.PMSHookHandler;
+import com.soz.utils.FileUtils;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -154,4 +157,60 @@ public final class HookHelper {
         // 替换
         dexElementsField.set(pathList, newElements);
     }
+
+    private static ApplicationInfo generateApplicationInfo(File apkFile) throws Exception{
+        Class<?> packageParserClass = Class.forName("android.content.pm.PackageParser");
+
+        Class<?> packageParser$PackageClass = Class.forName("android.content.pm.PackageParser$Package");
+        Class<?> packageUserStateClass = Class.forName("android.content.pm.PackageUserState");
+        Method generateApplicationInfoMethod = packageParserClass.getDeclaredMethod("generateApplicationInfo",
+                packageParser$PackageClass, int.class, packageUserStateClass);
+        Object packageParser = packageParserClass.newInstance();
+        Method parsePackageMethod = packageParserClass.getDeclaredMethod("parsePackage", File.class, int.class);
+
+        Object packageObject = parsePackageMethod.invoke(packageParser, apkFile, 0);
+
+        Object defaultPackageUserState = packageUserStateClass.newInstance();
+
+        ApplicationInfo applicationInfo = (ApplicationInfo) generateApplicationInfoMethod.invoke(packageParser,
+                packageObject, 0, defaultPackageUserState);
+
+        String apkPath = apkFile.getPath();
+
+        applicationInfo.sourceDir = apkPath;
+        applicationInfo.publicSourceDir = apkPath;
+
+         return applicationInfo;
+    }
+
+    public static void CustomClassloader(Context context, File apkFile) throws Exception {
+        // 获取 ActivityThread 对象
+        Class<?> activityThreadClass = Class.forName("android.app.ActivityThread");
+        Method currentActivityThreadMethod = activityThreadClass.getDeclaredMethod("currentActivityThread");
+        Object currentActivityThread = currentActivityThreadMethod.invoke(null);
+
+        Field mPackageField = activityThreadClass.getDeclaredField("mPackages");
+        mPackageField.setAccessible(true);
+        Map mPackages = (Map) mPackageField.get(currentActivityThread);
+
+        Class<?> compatibilityInfo = Class.forName("android.content.res.CompatibilityInfo");
+        Method getPackageInfoNoCheckMethod = activityThreadClass.getDeclaredMethod("getPackageInfoNoCheck", ApplicationInfo.class, compatibilityInfo);
+
+        Field defaultCompatibilityInfoField = compatibilityInfo.getDeclaredField("DEFAULT_COMPATIBILITY_INFO");
+        defaultCompatibilityInfoField.setAccessible(true);
+        Object defaultCompatibilityInfo = defaultCompatibilityInfoField.get(null);
+
+        ApplicationInfo applicationInfo = generateApplicationInfo(apkFile);
+        Object loadedApk = getPackageInfoNoCheckMethod.invoke(currentActivityThread, applicationInfo, defaultCompatibilityInfo);
+
+        String odexPath = FileUtils.getPluginOptDexDir(context).getPath();
+        String libDir = FileUtils.getPluginLibDir(context).getPath();
+        ClassLoader classLoader = new DexClassLoader(apkFile.getPath(), odexPath, libDir, ClassLoader.getSystemClassLoader());
+        Field mClassLoaderFile = loadedApk.getClass().getDeclaredField("mClassLoader");
+        mClassLoaderFile.setAccessible(true);
+        mClassLoaderFile.set(loadedApk, classLoader);
+        WeakReference weakReference = new WeakReference(loadedApk);
+        mPackages.put(applicationInfo.packageName, weakReference);
+    }
+
 }

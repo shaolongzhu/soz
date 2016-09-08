@@ -52,4 +52,32 @@ public class FileUtils {
             e.printStackTrace();
         }
     }
+
+    /**
+     * 基本目录 /data/data/<package>/files/plugin/
+     * @param context
+     * @return
+     */
+    private static File getPluginBaseDir(Context context) {
+        File file = context.getFileStreamPath("plugin");
+        return enforceDirExists(file);
+    }
+
+    private static synchronized File enforceDirExists(File baseDir) {
+        if (!baseDir.exists()) {
+            boolean ret = baseDir.mkdir();
+            if (!ret) {
+                throw new RuntimeException("create dir " + baseDir + "failed");
+            }
+        }
+        return baseDir;
+    }
+
+    public static File getPluginOptDexDir(Context context) {
+        return enforceDirExists(new File(getPluginBaseDir(context), "odex"));
+    }
+
+    public static File getPluginLibDir(Context context) {
+        return enforceDirExists(new File(getPluginBaseDir(context), "lib"));
+    }
 }

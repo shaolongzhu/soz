@@ -32,12 +32,7 @@ public class ClassLoaderHookActivity extends BaseHookPluginActivity {
         this.setContentView(R.layout.act_classloader_hook);
         this.acquireIntentData();
         this.initEvent();
-        if (this.mClassLoaderType == ConstantType.CLASSLOADER_PATCH) {
-            loadApkPatch();
-        } else {
-            // TODO:need to add other method
-            loadApkPatch();
-        }
+        loadApkPatch(this.mClassLoaderType);
     }
 
     private void acquireIntentData() {
@@ -63,14 +58,21 @@ public class ClassLoaderHookActivity extends BaseHookPluginActivity {
         FileUtils.extractAssets(newBase, ConstantUtils.APK_FILE_2);
     }
 
-    private void loadApkPatch() {
+    private void loadApkPatch(int classLoaderType) {
         try {
             File apkFile = this.getFileStreamPath(ConstantUtils.APK_FILE_2);
-            File dexFile = this.getFileStreamPath(ConstantUtils.DEX_FILE_2);
-            HookHelper.PatchClassLoader(this.getClassLoader(),apkFile, dexFile);
+            if (classLoaderType == ConstantType.CLASSLOADER_PATCH) {
+                mLogger.i("[loadApkPatch] patch");
+                File dexFile = this.getFileStreamPath(ConstantUtils.DEX_FILE_2);
+                HookHelper.PatchClassLoader(this.getClassLoader(),apkFile, dexFile);
+            } else {
+                mLogger.i("[loadApkPatch] custom");
+                HookHelper.CustomClassloader(this, apkFile);
+            }
             HookHelper.HookActivityManager();
             HookHelper.HookActivityThreadHandler();
         } catch (Exception e) {
+            e.printStackTrace();
             mLogger.i("loadApkPatch failed");
         }
     }

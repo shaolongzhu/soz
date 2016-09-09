@@ -55,6 +55,8 @@
             android:label="Stub Activity"></activity>
         <activity android:name=".plugin.proxyHook.ClassLoaderHookActivity"
             android:label="Classloader Activity"></activity>
+        <activity android:name=".plugin.proxyHook.ReceiverHookActivity"
+            android:label="Receiver Activity"></activity>
     </application>
 
 </manifest>

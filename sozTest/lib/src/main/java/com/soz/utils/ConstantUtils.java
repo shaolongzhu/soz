@@ -40,4 +40,14 @@ public class ConstantUtils {
      * activity name for test 2
      */
     public static final String PLUGIN_ACTIVITY_2 = "com.soz.sozPlugin.DLPluginActivity";
+
+    /**
+     * receiver action 1
+     */
+    public static final String PLUGIN_ACTION_RECEIVER_1 = "com.soz.sozPlugin.receiver.receiver1";
+
+    /**
+     * receiver action 2
+     */
+    public static final String PLUGIN_ACTION_RECEIVER_2 = "com.soz.sozPlugin.receiver.receiver2";
 }

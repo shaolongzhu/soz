@@ -2,7 +2,10 @@ package com.soz.hook;
 
 import android.app.ActivityManager;
 import android.app.Instrumentation;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Handler;
@@ -13,6 +16,7 @@ import com.soz.hook.proxy.ActivityThreadHandlerCallback;
 import com.soz.hook.proxy.BinderHookProxyHandler;
 import com.soz.hook.proxy.CheatInstrumentation;
 import com.soz.hook.proxy.PMSHookHandler;
+import com.soz.utils.ClassLoaderUtils;
 import com.soz.utils.FileUtils;
 
 import java.io.File;
@@ -22,6 +26,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import dalvik.system.DexClassLoader;
@@ -211,6 +217,58 @@ public final class HookHelper {
         mClassLoaderFile.set(loadedApk, classLoader);
         WeakReference weakReference = new WeakReference(loadedApk);
         mPackages.put(applicationInfo.packageName, weakReference);
+    }
+
+    /**
+     * 解析APK中的 <receiver>
+     * @param apkFile
+     * @return
+     */
+    private static Map<ActivityInfo, List<? extends IntentFilter>> parserReceivers(File apkFile) throws Exception {
+        Map<ActivityInfo, List<? extends IntentFilter>> cache = new HashMap<ActivityInfo, List<? extends IntentFilter>>();
+        Class<?> packageParserClass = Class.forName("android.content.pm.PackageParser");
+        Method parsePackageMethod = packageParserClass.getDeclaredMethod("parsePackage", File.class, int.class);
+
+        Object packageParser = packageParserClass.newInstance();
+        Object packageObject = parsePackageMethod.invoke(packageParser, apkFile, PackageManager.GET_RECEIVERS);
+        Field receiversField = packageObject.getClass().getDeclaredField("receivers");
+        receiversField.setAccessible(true);
+        List receivers = (List) receiversField.get(packageObject);
+
+        Class<?> packageParser$ActivityClass = Class.forName("android.content.pm.PackageParser$Activity");
+        Class<?> packageUserStateClass = Class.forName("android.content.pm.PackageUserState");
+        Class<?> userHandler = Class.forName("android.os.UserHandle");
+        Method getCallingUserIdMethod = userHandler.getDeclaredMethod("getCallingUserId");
+        int userId = (Integer) getCallingUserIdMethod.invoke(null);
+        Object packageUserState = packageUserStateClass.newInstance();
+
+        Class<?> componentClass = Class.forName("android.content.pm.PackageParser$Component");
+        Field intentField = componentClass.getDeclaredField("intents");
+
+        Method generateReceiverInfo = packageParserClass.getDeclaredMethod("generateActivityInfo",
+                packageParser$ActivityClass, int.class, packageUserStateClass, int.class);
+        for (Object receiver : receivers) {
+            ActivityInfo info = (ActivityInfo) generateReceiverInfo.invoke(packageParser, receiver, 0, packageUserState, userId);
+            List<? extends IntentFilter> filters = (List<? extends IntentFilter>) intentField.get(receiver);
+            cache.put(info, filters);
+        }
+
+        return cache;
+    }
+
+    public static void loadReceiver(Context context, File apkFile) throws Exception {
+        Map<ActivityInfo, List<? extends IntentFilter>> cache = parserReceivers(apkFile);
+        ClassLoader cl = null;
+        for (ActivityInfo activityInfo:cache.keySet()) {
+            List<? extends IntentFilter> intentFilters = cache.get(activityInfo);
+            if (cl == null) {
+                cl = ClassLoaderUtils.getPluginClassLoader(context, apkFile);
+            }
+            for (IntentFilter intentFilter:intentFilters) {
+                BroadcastReceiver receiver = (BroadcastReceiver) cl.loadClass(activityInfo.name).newInstance();
+                context.registerReceiver(receiver, intentFilter);
+            }
+        }
     }
 
 }

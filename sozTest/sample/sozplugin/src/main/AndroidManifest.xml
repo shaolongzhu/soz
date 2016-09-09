@@ -12,6 +12,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".DLPluginActivity"></activity>
+        <receiver android:name=".receiver.receiver1">
+            <intent-filter>
+                <action android:name="com.soz.sozPlugin.receiver.receiver1"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".receiver.receiver2">
+            <intent-filter>
+                <action android:name="com.soz.sozPlugin.receiver.receiver2"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

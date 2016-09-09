@@ -60,4 +60,10 @@
         android:text="Classloader hook"
         android:onClick="jumpToClassloaderHook"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="receiver hook"
+        android:onClick="jumpToReceiverHook"/>
+
 </LinearLayout>

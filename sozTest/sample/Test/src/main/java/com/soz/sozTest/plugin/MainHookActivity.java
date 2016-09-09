@@ -14,6 +14,7 @@ import com.soz.sozTest.plugin.proxyHook.BinderHookActivity;
 import com.soz.sozTest.plugin.proxyHook.ClassLoaderHookActivity;
 import com.soz.sozTest.plugin.proxyHook.PMSHookActivity;
 import com.soz.sozTest.plugin.proxyHook.ProxyHookActivity;
+import com.soz.sozTest.plugin.proxyHook.ReceiverHookActivity;
 import com.soz.utils.AppManagerUtils;
 import com.soz.utils.ConstantType;
 import com.soz.utils.ConstantUtils;
@@ -88,6 +89,12 @@ public class MainHookActivity extends BaseActivity {
         mLogger.i("jumpToClassloaderHook");
         Intent intent = new Intent(MainHookActivity.this, ClassLoaderHookActivity.class);
         intent.putExtra(ConstantUtils.CLASSLOADER_TYPE, this.mClassloaderType);
+        AppManagerUtils.startActivity(this, intent);
+    }
+
+    public void jumpToReceiverHook(View view) {
+        mLogger.i("jumpToReceiverHook");
+        Intent intent = new Intent(MainHookActivity.this, ReceiverHookActivity.class);
         AppManagerUtils.startActivity(this, intent);
     }
 

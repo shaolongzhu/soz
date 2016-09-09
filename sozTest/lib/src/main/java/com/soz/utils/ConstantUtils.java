@@ -22,6 +22,11 @@ public class ConstantUtils {
     public static final String STUB_ACTIVITY =  "com.soz.sozTest.act.StubActivity";
 
     /**
+     * service name for test
+     */
+    public static final String STUB_SERVICE = "com.soz.sozTest.service.StubService";
+
+    /**
      * apk file
      */
     public static final String APK_FILE_2 = "sozPlugin.apk";
@@ -50,4 +55,10 @@ public class ConstantUtils {
      * receiver action 2
      */
     public static final String PLUGIN_ACTION_RECEIVER_2 = "com.soz.sozPlugin.receiver.receiver2";
+
+    /**
+     * service 1
+     */
+    public static final String PLUGIN_SERVICE_1 = "com.soz.sozPlugin.service.service1";
+
 }

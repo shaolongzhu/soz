@@ -3,11 +3,13 @@ package com.soz.hook;
 import android.app.ActivityManager;
 import android.app.Instrumentation;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ServiceInfo;
 import android.os.Handler;
 import android.os.IBinder;
 
@@ -269,6 +271,36 @@ public final class HookHelper {
                 context.registerReceiver(receiver, intentFilter);
             }
         }
+    }
+
+    public static Map<ComponentName, ServiceInfo> loadServices(File apkFile) throws Exception {
+        Map<ComponentName, ServiceInfo> serviceInfoMap = new HashMap<ComponentName, ServiceInfo>();
+        Class<?> packageParserClass = Class.forName("android.content.pm.PackageParser");
+        Method parserPackageMethod = packageParserClass.getDeclaredMethod("parsePackage", File.class, int.class);
+        Object packageParser = packageParserClass.newInstance();
+
+        Object packageObj = parserPackageMethod.invoke(packageParser, apkFile, PackageManager.GET_SERVICES);
+
+        Field servicesField = packageObj.getClass().getDeclaredField("services");
+        servicesField.setAccessible(true);
+        List services = (List) servicesField.get(packageObj);
+
+        Class<?> packageParser$ServiceClass = Class.forName("android.content.pm.PackageParser$Service");
+        Class<?> packageUserStateClass = Class.forName("android.content.pm.PackageUserState");
+        Class<?> userHandle = Class.forName("android.os.UserHandle");
+        Method getCallingUserIdMethod = userHandle.getDeclaredMethod("getCallingUserId");
+        int userId = (Integer) getCallingUserIdMethod.invoke(null);
+        Object defaultUserState = packageUserStateClass.newInstance();
+
+        Method generateServiceInfoMethod = packageParserClass.getDeclaredMethod("generateServiceInfo",
+                packageParser$ServiceClass, int.class, packageUserStateClass, int.class);
+
+        for (Object service:services) {
+            ServiceInfo info = (ServiceInfo) generateServiceInfoMethod.invoke(packageParser, service, 0, defaultUserState, userId);
+            serviceInfoMap.put(new ComponentName(info.packageName, info.name), info);
+        }
+
+        return serviceInfoMap;
     }
 
 }

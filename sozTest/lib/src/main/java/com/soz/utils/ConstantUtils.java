@@ -61,4 +61,9 @@ public class ConstantUtils {
      */
     public static final String PLUGIN_SERVICE_1 = "com.soz.sozPlugin.service.service1";
 
+    /**
+     * plugin provider authority
+     */
+    public static final String PROVIDER_AUTHORITY = "com.soz.sozPlugin.provider.Provider1";
+
 }

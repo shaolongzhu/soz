@@ -23,6 +23,9 @@
             </intent-filter>
         </receiver>
         <service android:name=".service.service1"></service>
+        <provider
+            android:authorities="com.soz.sozPlugin.provider.Provider1"
+            android:name=".provider.Provider1"></provider>
     </application>
 
 </manifest>

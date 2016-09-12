@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ProviderInfo;
 import android.content.pm.ServiceInfo;
 import android.os.Handler;
 import android.os.IBinder;
@@ -28,6 +29,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -301,6 +303,48 @@ public final class HookHelper {
         }
 
         return serviceInfoMap;
+    }
+
+    private static List<ProviderInfo> parseProviders(File apkFile) throws Exception{
+        // 获取 packageParser 对象
+        Class<?> packageParserClass = Class.forName("android.content.pm.PackageParser");
+        Method parsePackageMethod = packageParserClass.getDeclaredMethod("parsePackage", File.class, int.class);
+        Object packageParser = packageParserClass.newInstance();
+        Object packageObject = parsePackageMethod.invoke(packageParser, apkFile, PackageManager.GET_PROVIDERS);
+
+        // 获取 package 对象中的 providers 信息
+        Field providersField = packageObject.getClass().getDeclaredField("providers");
+        List providers = (List) providersField.get(packageObject);
+
+        Class<?> packageParser$ProviderClass = Class.forName("android.content.pm.PackageParser$Provider");
+        Class<?> packageUserStateClass = Class.forName("android.content.pm.PackageUserState");
+        Object defaultUserState = packageUserStateClass.newInstance();
+        Class<?> userHandle = Class.forName("android.os.UserHandle");
+        Method getCallingUserIdClass = userHandle.getDeclaredMethod("getCallingUserId");
+        int userId = (Integer) getCallingUserIdClass.invoke(null);
+        Method generateProviderInfoMethod = packageParserClass.getDeclaredMethod("generateProviderInfo", packageParser$ProviderClass, int.class, packageUserStateClass, int.class);
+
+        List<ProviderInfo> ret = new ArrayList<>();
+        for (Object provider: providers) {
+            ProviderInfo info = (ProviderInfo) generateProviderInfoMethod.invoke(packageParser, provider, 0, defaultUserState, userId);
+            ret.add(info);
+        }
+
+        return ret;
+    }
+
+    public static void loadProviders(Context context, File apkFile) throws Exception {
+        List<ProviderInfo> providers = parseProviders(apkFile);
+        for (ProviderInfo providerInfo:providers) {
+            providerInfo.applicationInfo.packageName = context.getPackageName();
+        }
+
+        Class<?> activityThreadClass = Class.forName("android.app.ActivityThread");
+        Method currentThreadClass = activityThreadClass.getDeclaredMethod("currentActivityThread");
+        Object currentThread = currentThreadClass.invoke(null);
+        Method installProvidersMethod = activityThreadClass.getDeclaredMethod("installContentProviders", Context.class, List.class);
+        installProvidersMethod.setAccessible(true);
+        installProvidersMethod.invoke(currentThread, context, providers);
     }
 
 }

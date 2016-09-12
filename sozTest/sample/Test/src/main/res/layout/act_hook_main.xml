@@ -72,4 +72,10 @@
         android:text="service hook"
         android:onClick="jumpToServiceHook"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="provider hook"
+        android:onClick="jumpToProviderHook"/>
+
 </LinearLayout>

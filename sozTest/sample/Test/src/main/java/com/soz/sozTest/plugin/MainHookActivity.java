@@ -13,6 +13,7 @@ import com.soz.sozTest.plugin.proxyHook.ActHookActivity;
 import com.soz.sozTest.plugin.proxyHook.BinderHookActivity;
 import com.soz.sozTest.plugin.proxyHook.ClassLoaderHookActivity;
 import com.soz.sozTest.plugin.proxyHook.PMSHookActivity;
+import com.soz.sozTest.plugin.proxyHook.ProviderHookActivity;
 import com.soz.sozTest.plugin.proxyHook.ProxyHookActivity;
 import com.soz.sozTest.plugin.proxyHook.ReceiverHookActivity;
 import com.soz.sozTest.plugin.proxyHook.ServiceHookActivity;
@@ -102,6 +103,12 @@ public class MainHookActivity extends BaseActivity {
     public void jumpToServiceHook(View view) {
         mLogger.i("jumpToServiceHook");
         Intent intent = new Intent(MainHookActivity.this, ServiceHookActivity.class);
+        AppManagerUtils.startActivity(this, intent);
+    }
+
+    public void jumpToProviderHook(View view) {
+        mLogger.i("jumpToProviderHook");
+        Intent intent = new Intent(MainHookActivity.this, ProviderHookActivity.class);
         AppManagerUtils.startActivity(this, intent);
     }
 

@@ -22,7 +22,32 @@ for test
 18.怎么hook Activity。
 19.View的刷新机制。
 20.View的事件机制。
-21.dispatchTouchEvent和onInterceptTouchEvent谁先被调用。q::
+21.dispatchTouchEvent和onInterceptTouchEvent谁先被调用。
+22.activity有几种启动模式，它门的应用场景。
+23.onLayout、onMeasure、onDraw的调用在View和ViewGroup的调用方式。
+24.能不能hook一个方法，怎么hook？
+25.画出插件化的框架。
+26.什么是有序广播，优先级高的receiver一定会先收到广播吗？
+27.广播的生命周期。
+28.service的生命周期。
+29.启动service的方式，它门有什么区别？
+30.什么是过渡绘制，什么情况会导致过渡绘制？
+31.SQLite的增、查、删、改的语用是什么？
+32.用的什么数据库，它有什么特点？
+33.二叉树的前序、中序和后序遍历的顺序是什么？
+34.网络的七层和五层分别是什么？
+35.handler机制中MessageQueue的作用？
+
+
+
+
+
+
+
+
+
+
+
 
 #OpenGL
 1.CPU和GPU间的通信。

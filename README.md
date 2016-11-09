@@ -28,7 +28,7 @@ for test
 23.onLayout、onMeasure、onDraw的调用在View和ViewGroup的调用方式。
 24.能不能hook一个方法，怎么hook？
 25.画出插件化的框架。
-26.什么是有序广播，优先级高的receiver一定会先收到广播吗？
+26.什么是有序广播，优先级高的receiver一定会先收到广播吗？(本地广播)
 27.广播的生命周期。
 28.service的生命周期。
 29.启动service的方式，它门有什么区别？
@@ -56,9 +56,10 @@ for test
 50.除了hashMap，还有什么Map。
 51.synchronized和handler的使用场景。
 52.构造函数中的方法，在子类中重写。
-
-
-
+53.NEW_TASK的flag对应四种启动模式的哪个？
+54.服务进程能变为前台进程吗？
+55.AMS能通过aidl调用客户端服务吗?
+56.用过surfaceView没有？
 
 
 
@@ -69,3 +70,5 @@ for test
 
 #OpenGL
 1.CPU和GPU间的通信。
+2.纹理坐标。
+3.齐次坐标。

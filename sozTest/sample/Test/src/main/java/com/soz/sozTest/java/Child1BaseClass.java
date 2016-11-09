@@ -7,23 +7,23 @@ import com.soz.log.Logger;
  */
 
 public class Child1BaseClass extends BaseClass {
-    private Logger mLogger = new Logger("Child2BaseClass");
+    private Logger mLogger = new Logger("Child1BaseClass");
     public int i = 0;
 
     public Child1BaseClass() {
         if (mLogger == null) {
-            mLogger = new Logger("Child2BaseClass");
-            mLogger.i("[Child2BaseClass()]mLogger == null");
+            mLogger = new Logger("Child1BaseClass");
+            mLogger.i("[Child1BaseClass()]mLogger == null");
         } else {
-            mLogger.i("[Child2BaseClass()]mLogger != null");
+            mLogger.i("[Child1BaseClass()]mLogger != null");
         }
-        mLogger.i("Child2BaseClass");
+        mLogger.i("Child1BaseClass");
     }
 
     @Override
     public void init() {
         if (mLogger == null) {
-            mLogger = new Logger("Child2BaseClass");
+            mLogger = new Logger("Child1BaseClass");
             mLogger.i("[init()]mLogger == null");
         }
         mLogger.i("init");

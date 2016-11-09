@@ -61,6 +61,7 @@
             android:label="Service Activity"></activity>
         <activity android:name=".plugin.proxyHook.ProviderHookActivity"
             android:label="Provider Activity"></activity>
+        <activity android:name=".java.EmptyActivity"></activity>
 
         <service android:name=".service.StubService"></service>
     </application>

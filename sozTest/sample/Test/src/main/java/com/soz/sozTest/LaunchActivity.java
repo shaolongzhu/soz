@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.soz.activity.BaseActivity;
+import com.soz.sozTest.java.EmptyActivity;
 import com.soz.sozTest.plugin.MainHookActivity;
 import com.soz.utils.AppManagerUtils;
 import com.soz.sozTest.launchMode.TestOneActivity;
@@ -40,6 +41,11 @@ public class LaunchActivity extends BaseActivity {
 
     public void jumpToHookMain(View view) {
         Intent intent = new Intent(LaunchActivity.this, MainHookActivity.class);
+        AppManagerUtils.startActivity(this, intent);
+    }
+
+    public void jumpToTest(View view) {
+        Intent intent = new Intent(LaunchActivity.this, EmptyActivity.class);
         AppManagerUtils.startActivity(this, intent);
     }
 }

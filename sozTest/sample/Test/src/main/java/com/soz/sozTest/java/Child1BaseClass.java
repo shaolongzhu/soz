@@ -1,0 +1,32 @@
+package com.soz.sozTest.java;
+
+import com.soz.log.Logger;
+
+/**
+ * Created by zhushaolong on 11/9/16.
+ */
+
+public class Child1BaseClass extends BaseClass {
+    private Logger mLogger = new Logger("Child2BaseClass");
+    public int i = 0;
+
+    public Child1BaseClass() {
+        if (mLogger == null) {
+            mLogger = new Logger("Child2BaseClass");
+            mLogger.i("[Child2BaseClass()]mLogger == null");
+        } else {
+            mLogger.i("[Child2BaseClass()]mLogger != null");
+        }
+        mLogger.i("Child2BaseClass");
+    }
+
+    @Override
+    public void init() {
+        if (mLogger == null) {
+            mLogger = new Logger("Child2BaseClass");
+            mLogger.i("[init()]mLogger == null");
+        }
+        mLogger.i("init");
+        i = 1;
+    }
+}

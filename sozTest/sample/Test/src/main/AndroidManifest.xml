@@ -62,8 +62,15 @@
         <activity android:name=".plugin.proxyHook.ProviderHookActivity"
             android:label="Provider Activity"></activity>
         <activity android:name=".java.EmptyActivity"></activity>
+        <activity android:name=".broadcast.Broadcast1Activity"></activity>
 
         <service android:name=".service.StubService"></service>
+
+        <receiver android:name=".broadcast.BroadcastReceiver1">
+            <intent-filter>
+                <action android:name="com.soz.sozTest.broadcast1"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

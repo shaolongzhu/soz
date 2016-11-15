@@ -5,14 +5,17 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.soz.activity.BaseActivity;
+import com.soz.log.Logger;
+import com.soz.sozTest.broadcast.Broadcast1Activity;
 import com.soz.sozTest.java.EmptyActivity;
-import com.soz.sozTest.plugin.MainHookActivity;
-import com.soz.utils.AppManagerUtils;
 import com.soz.sozTest.launchMode.TestOneActivity;
 import com.soz.sozTest.plugin.ChangeSkinActivity;
 import com.soz.sozTest.plugin.DynamicLoadActivity;
+import com.soz.sozTest.plugin.MainHookActivity;
+import com.soz.utils.AppManagerUtils;
 
 public class LaunchActivity extends BaseActivity {
+    Logger mLogger = new Logger("LaunchActivity");
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,12 @@ public class LaunchActivity extends BaseActivity {
 
     public void jumpToTest(View view) {
         Intent intent = new Intent(LaunchActivity.this, EmptyActivity.class);
+        AppManagerUtils.startActivity(this, intent);
+    }
+
+    public void jumpToBroadcast(View view) {
+        mLogger.i("jumpToBroadcast");
+        Intent intent = new Intent(LaunchActivity.this, Broadcast1Activity.class);
         AppManagerUtils.startActivity(this, intent);
     }
 }

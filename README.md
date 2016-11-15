@@ -61,9 +61,26 @@ for test
 55.AMS能通过aidl调用客户端服务吗?
 56.用过surfaceView没有？
 
-
-
-
+61.intentFilter、action以及category的区别。
+62.介绍下binder
+63.怎么解决滑动冲突。
+64.一个ListView实现两排Item，怎么解决Position以及事件。
+65.10亿个数据怎么找出最大的10个。
+66.有没有自定义View，怎么自定义View。
+67.介绍下View的绘制机制。
+68.在ViewGroup中的OnDraw方法绘制能显示吗？
+69.介绍下handler原理。
+70.HashMap和TreeMap的区别。
+71.怎么实现滑动一个隐藏一个显示的效果。
+72.写一个类实现二叉树的add、find以及toList函数。
+73.介绍下插件化以及气应用场景。
+74.二维码的原理。
+75.notify和wait的区别。
+76.synchronized关键字修饰this、obj以及class的区别。
+77.知道http以及http编程吗？
+78.为什么ReleativeLayout进行了两次测量？
+79.LinearLayout中Weight的作用，值越大还是越小其越大？
+80.ReleativeLayout和LinearLayout的区别。Open
 
 
 

@@ -80,8 +80,9 @@ for test
 77.知道http以及http编程吗？
 78.为什么ReleativeLayout进行了两次测量？
 79.LinearLayout中Weight的作用，值越大还是越小其越大？
-80.ReleativeLayout和LinearLayout的区别。Open
-
+80.ReleativeLayout和LinearLayout的区别。
+81.java 8以及java 9的特性。
+82.用过webp没有？
 
 
 

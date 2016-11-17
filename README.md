@@ -83,7 +83,7 @@ for test
 80.ReleativeLayout和LinearLayout的区别。
 81.java 8以及java 9的特性。
 82.用过webp没有？
-
+83.序列化有哪两种，其中uid的作用是什么？
 
 
 #OpenGL

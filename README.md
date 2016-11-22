@@ -84,7 +84,8 @@ for test
 81.java 8以及java 9的特性。
 82.用过webp没有？
 83.序列化有哪两种，其中uid的作用是什么？
-
+84.ThreadLocal原理。
+85.使用过锁没有？
 
 #OpenGL
 1.CPU和GPU间的通信。

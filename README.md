@@ -110,6 +110,7 @@ for test
 103.相同的id，通过activity的findViewById是找到的哪个？
 104.sharepreference的缺点，以及apply和commit的却别，会crash吗？
 105.画下app的架构图。
+106.android的权限和沙箱机制。
 
 #OpenGL
 1.CPU和GPU间的通信。

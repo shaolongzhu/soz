@@ -103,8 +103,13 @@ for test
 
 98.画出sdk的架构图。
 
-
-
+99.handler中postDelay通过修改系统时间消息还执行吗？
+100.handler中没有消息时是如何阻塞的。
+101.什么是动态代理，以及动态代理的关键类。
+102.hashMap的put的过程,当冲突时是插入的是头还是尾部,hashMap是是怎么找到index的
+103.相同的id，通过activity的findViewById是找到的哪个？
+104.sharepreference的缺点，以及apply和commit的却别，会crash吗？
+105.画下app的架构图。
 
 #OpenGL
 1.CPU和GPU间的通信。

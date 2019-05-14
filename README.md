@@ -112,6 +112,30 @@ for test
 105.画下app的架构图。
 106.android的权限和沙箱机制。
 
+107.说下handler。
+108.wait和synchronized一起使用。
+109.synchronized锁普通方法。
+110.synchronized和lock的区别。
+111.用什么数据存储。
+112.sharedPreferences的anr优化。
+113.看过哪些第三方库。
+114.怎么设计一个图像加载框架。
+115.写过自定义view没有。
+116.内存泄露有哪些。
+117.leakcanary的原理，为什么弱引用能检测内存泄露。
+118.listView怎么优化。
+119.线程怎么同步。
+120.blockQueue的使用场景。
+121.插件化的原理。
+122.热修复理论。
+123.语音的DAU。
+124.ThreadLocal和Handler的结合使用。
+125.能在一个线程里面new handler吗?
+
+
+
+
+
 #OpenGL
 1.CPU和GPU间的通信。
 2.纹理坐标。

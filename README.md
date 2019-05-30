@@ -152,6 +152,14 @@ for test
 143.用过openGL吗？
 144.protobuf数据交换格式。
 
+145.特征提取的有哪些算法。
+146.OpenGL的渲染管线。
+147.java虚拟机的内存模型。
+148.什么情况下发生stackOverFlow.
+149.什么情况下发生OOM。
+150.怎么生成阴影[openGL]
+151.音视频编码格式。
+
 
 #OpenGL
 1.CPU和GPU间的通信。

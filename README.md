@@ -208,6 +208,14 @@ for test
 
 190.异常框架。
 
+191.一个List<String>的字符串列表，求最大前缀串。
+192.final关键字的作用，在java1.8的中的使用，修饰成员变量和局部变量的区别。
+193.怎么优化app内存。
+194.onMeasure onlayout onDraw,  其中MeasureSpec的意义，其中模式有哪些跟match_parent等怎么匹配。
+195.图片加载怎么优化。
+196.怎么找内存泄露，activity生命周期，怎么设计MAT或者leakcanary，leakcanary的原理。
+197.immutable和mutable的区别。
+
 #OpenGL
 1.CPU和GPU间的通信。
 2.纹理坐标。

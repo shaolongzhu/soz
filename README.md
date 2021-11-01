@@ -294,6 +294,25 @@ for test
 261. 进程间通信的方法。
 262. ACTIVITY的启动模式，其应用的场景。
 
+263. this和super的原理。
+264. threadlocal的原理，map是什么，存放的key和value是什么。
+265. 反射的原理，能反射static final吗。
+266. lamda表达式的原理。
+267. android用的垃圾回收。
+268. handlerThread是什么。
+269. apk的打包流程，有没有手动打过包。
+270. api和implemation的区别。
+271. gradle的原理，打包慢的原因。
+272. congradutatiom的原理。
+273. leakcanary的原理。
+274. 有没有解决系统层面的anr。
+275. 输入法弹窗的高度怎么获得。
+276. 有没有用过kotlin。
+277. 签名v1  v2和v3的区别。
+278. supportv4和v7的区别和作用，为什么这么取名字。
+279. dex oat和odex的区别。
+280. 硬件加速的原理。
+281. aspectj 还有leakcanary block canary 以及crash的追踪。
 
 #OpenGL
 1.CPU和GPU间的通信。

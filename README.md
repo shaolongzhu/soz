@@ -314,6 +314,13 @@ for test
 280. 硬件加速的原理。
 281. aspectj 还有leakcanary block canary 以及crash的追踪。
 
+282. map和unordered_map的Key可以是自定义的类吗？
+283.  A *p = nullprt; p->func()；一定crash吗？
+284. rtc媒体传输经验。
+285. quic协议栈的原理。
+286. DirectByteBuffer的原理。
+287. jni local references的原理。
+
 #OpenGL
 1.CPU和GPU间的通信。
 2.纹理坐标。

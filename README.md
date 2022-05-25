@@ -321,6 +321,24 @@ for test
 286. DirectByteBuffer的原理。
 287. jni local references的原理。
 
+
+288. ANR率、java率是多少，有没有跟竞品对比，什么样的anr率才是符合预期的或者比较认可的状态。
+289. 第三方crash怎么兼容，需要考虑那些东西，有没有研究过crashLooper？
+290. View.post和handler.post的区别？
+291. onPause一定会执行么？
+292. handler能说多少说多少，知道消息屏障么？有比异步消息执行更早的么？
+293. MessageQueue存放在哪里？ThreadLocalMap是一个什么MAP。
+294. Queue的存放形式是什么样的？为什么这样存储？
+295. MVC、MVP以及MVVM的区别？ MVVM和LiveData.
+296. MVP如果有多个P怎么通信？ 借鉴context
+297. 知道Retrofit么哈？原理
+298. HashMap和ArrayMap的区别是什么？hashMap怎么扩容的，阈值为什么是0.75？扩容后相对位置会变化么？需要重新拷贝么？
+299. websocket底层是tcp还是udp？为什么？ tcp和udp的区别是什么？
+300. 网络缓存怎么做的？各个字段的意义是什么？
+301. token、cokie以及session的区别是什么？
+302. ThreadLocal是什么？
+303. 写一个双重判空锁的单例模式？指令重排的意义？
+
 #OpenGL
 1.CPU和GPU间的通信。
 2.纹理坐标。

@@ -375,7 +375,7 @@ for test
 334. 鸿蒙的NAPI中C层怎么持有TS层的线程。
 335. 怎么判断是否发生了死锁，如果线上发生了死锁有没有方案。
 
-336. recycleView的复用，以及怎么写Adapter.
+336. recycleView的复用，以及怎么写Adapter,notifyDataSetChanged.
 337. 写过自定义View没有
 338. 谈谈对kotlin的理解
 339. kotlin协程的理解
